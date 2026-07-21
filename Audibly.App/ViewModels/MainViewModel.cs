@@ -21,7 +21,6 @@ using CommunityToolkit.WinUI;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Sentry;
 using Sharpener.Extensions;
 using WinRT.Interop;
 
@@ -286,7 +285,7 @@ public class MainViewModel : BindableBase
                     {
                         if (t.Exception != null)
                             // Handle the exception
-                            LoggingService.LogError(t.Exception, true);
+                            LoggingService.LogError(t.Exception);
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
 
@@ -296,7 +295,7 @@ public class MainViewModel : BindableBase
         catch (Exception ex)
         {
             // Handle the exception
-            LoggingService.LogError(ex, true);
+            LoggingService.LogError(ex);
         }
     }
 
@@ -352,7 +351,7 @@ public class MainViewModel : BindableBase
         catch (Exception ex)
         {
             // Handle the exception
-            LoggingService.LogError(ex, true);
+            LoggingService.LogError(ex);
 
             await DialogService.ShowErrorDialogAsync("Failed to delete audiobook", ex.Message);
         }
@@ -470,7 +469,6 @@ public class MainViewModel : BindableBase
     /// </summary>
     public async Task MigrateDatabase()
     {
-        var transaction = SentrySdk.StartTransaction("Data Migration", "Data Migration");
         try
         {
             var file = await ApplicationData.Current.LocalFolder.GetFileAsync("audibly_export.audibly");
@@ -487,7 +485,7 @@ public class MainViewModel : BindableBase
             if (importedAudiobooks == null)
             {
                 // log the error
-                App.ViewModel.LoggingService.LogError(new Exception("Failed to deserialize the json file"), true);
+                App.ViewModel.LoggingService.LogError(new Exception("Failed to deserialize the json file"));
                 UserSettings.ShowDataMigrationFailedDialog = true;
                 return;
             }
@@ -565,7 +563,7 @@ public class MainViewModel : BindableBase
             UserSettings.ShowDataMigrationFailedDialog = true;
 
             // log the error
-            LoggingService.LogError(exception, true);
+            LoggingService.LogError(exception);
 
             // notify user that we failed to import their audiobooks
             EnqueueNotification(new Notification
@@ -580,7 +578,6 @@ public class MainViewModel : BindableBase
 
             UserSettings.NeedToImportAudiblyExport = false;
 
-            transaction.Finish();
 
             if (UserSettings.ShowDataMigrationFailedDialog)
             {
@@ -977,6 +974,7 @@ public class MainViewModel : BindableBase
         openPicker.SuggestedStartLocation = PickerLocationId.Desktop;
         openPicker.ViewMode = PickerViewMode.Thumbnail;
         openPicker.FileTypeFilter.Add(".m4b");
+        openPicker.FileTypeFilter.Add(".m4a");
         openPicker.FileTypeFilter.Add(".mp3");
 
         var file = await openPicker.PickSingleFileAsync();
@@ -1144,7 +1142,7 @@ public class MainViewModel : BindableBase
             {
                 Message = "Failed to import audiobooks!", Severity = InfoBarSeverity.Error
             });
-            LoggingService.LogError(e, true);
+            LoggingService.LogError(e);
         }
 
         await DialogService.CloseProgressDialogAsync();
@@ -1175,6 +1173,7 @@ public class MainViewModel : BindableBase
         openPicker.SuggestedStartLocation = PickerLocationId.Desktop;
         openPicker.ViewMode = PickerViewMode.Thumbnail;
         openPicker.FileTypeFilter.Add(".m4b");
+        openPicker.FileTypeFilter.Add(".m4a");
         openPicker.FileTypeFilter.Add(".mp3");
 
         var files = await openPicker.PickMultipleFilesAsync();
@@ -1251,7 +1250,7 @@ public class MainViewModel : BindableBase
             {
                 Message = "Failed to import audiobooks!", Severity = InfoBarSeverity.Error
             });
-            LoggingService.LogError(exception, true);
+            LoggingService.LogError(exception);
         }
         finally
         {
@@ -1352,7 +1351,7 @@ public class MainViewModel : BindableBase
             {
                 Message = "Failed to import audiobooks!", Severity = InfoBarSeverity.Error
             });
-            LoggingService.LogError(e, true);
+            LoggingService.LogError(e);
         }
 
         await DialogService.CloseProgressDialogAsync();
@@ -1523,7 +1522,7 @@ public class MainViewModel : BindableBase
                 }
                 catch (Exception ex)
                 {
-                    LoggingService.LogError(ex, true);
+                    LoggingService.LogError(ex);
                 }
         }
         catch (OperationCanceledException)
@@ -1536,7 +1535,7 @@ public class MainViewModel : BindableBase
         }
         catch (Exception ex)
         {
-            LoggingService.LogError(ex, true);
+            LoggingService.LogError(ex);
         }
         finally
         {

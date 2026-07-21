@@ -27,7 +27,7 @@ public static class DialogExtensions
         catch (Exception e)
         {
             // log the exception
-            App.ViewModel.LoggingService.LogError(e, true);
+            App.ViewModel.LoggingService.LogError(e);
             return ContentDialogResult.None;
         }
     }

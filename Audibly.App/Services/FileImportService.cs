@@ -15,7 +15,6 @@ using Audibly.App.Extensions;
 using Audibly.App.Services.Interfaces;
 using Audibly.App.ViewModels;
 using Audibly.Models;
-using AutoMapper;
 using Microsoft.UI.Xaml.Controls;
 using Sharpener.Extensions;
 using ChapterInfo = Audibly.Models.ChapterInfo;
@@ -24,13 +23,6 @@ namespace Audibly.App.Services;
 
 public class FileImportService : IImportFiles
 {
-    private static IMapper _mapper;
-
-    public FileImportService()
-    {
-        _mapper = new MapperConfiguration(cfg => { cfg.CreateMap<ATL.ChapterInfo, ChapterInfo>(); }).CreateMapper();
-    }
-
     #region IImportFiles Members
 
     public event IImportFiles.ImportCompletedHandler? ImportCompleted;
@@ -43,6 +35,7 @@ public class FileImportService : IImportFiles
 
         var files = Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories)
             .Where(file => file.EndsWith(".m4b", StringComparison.OrdinalIgnoreCase) ||
+                           file.EndsWith(".m4a", StringComparison.OrdinalIgnoreCase) ||
                            file.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase))
             .ToList();
         var numberOfFiles = files.Count;
@@ -85,7 +78,7 @@ public class FileImportService : IImportFiles
         if (string.IsNullOrEmpty(json))
         {
             // log the error
-            App.ViewModel.LoggingService.LogError(new Exception("Failed to read the json file"), true);
+            App.ViewModel.LoggingService.LogError(new Exception("Failed to read the json file"));
             ImportCompleted?.Invoke();
             return;
         }
@@ -96,7 +89,7 @@ public class FileImportService : IImportFiles
         if (importedAudiobooks == null)
         {
             // log the error
-            App.ViewModel.LoggingService.LogError(new Exception("Failed to deserialize the json file"), true);
+            App.ViewModel.LoggingService.LogError(new Exception("Failed to deserialize the json file"));
             return;
         }
 
@@ -275,7 +268,7 @@ public class FileImportService : IImportFiles
                 // read in the chapters
                 foreach (var ch in track.Chapters)
                 {
-                    var tmp = _mapper.Map<ChapterInfo>(ch);
+                    var tmp = MapChapter(ch);
                     tmp.Index = chapterIndex++;
                     tmp.ParentSourceFileIndex = sourceFile.Index;
                     audiobook.Chapters.Add(tmp);
@@ -321,7 +314,7 @@ public class FileImportService : IImportFiles
         catch (Exception e)
         {
             // log the error
-            App.ViewModel.LoggingService.LogError(e, true);
+            App.ViewModel.LoggingService.LogError(e);
             return null;
         }
     }
@@ -407,7 +400,7 @@ public class FileImportService : IImportFiles
             var chapterIndex = 0;
             foreach (var ch in track.Chapters)
             {
-                var tmp = _mapper.Map<ChapterInfo>(ch);
+                var tmp = MapChapter(ch);
                 tmp.Index = chapterIndex++;
                 tmp.ParentSourceFileIndex = sourceFile.Index;
                 audiobook.Chapters.Add(tmp);
@@ -432,8 +425,21 @@ public class FileImportService : IImportFiles
         catch (Exception e)
         {
             // log the error
-            App.ViewModel.LoggingService.LogError(e, true);
+            App.ViewModel.LoggingService.LogError(e);
             return null;
         }
+    }
+
+    private static ChapterInfo MapChapter(ATL.ChapterInfo chapter)
+    {
+        return new ChapterInfo(chapter.StartTime, chapter.Title)
+        {
+            EndTime = chapter.EndTime,
+            StartOffset = chapter.StartOffset,
+            EndOffset = chapter.EndOffset,
+            UseOffset = chapter.UseOffset,
+            UniqueID = chapter.UniqueID,
+            Subtitle = chapter.Subtitle
+        };
     }
 }

@@ -45,7 +45,7 @@ public sealed partial class ErrorContentDialog : ContentDialog
         }
         catch (Exception ex)
         {
-            ViewModel.LoggingService.LogError(ex, true);
+            ViewModel.LoggingService.LogError(ex);
 
             // notify user with toast notification
             var notification = new Notification

@@ -18,7 +18,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
-using Sentry;
 using DispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue;
 
 namespace Audibly.App.Views;
@@ -39,13 +38,13 @@ public sealed partial class LibraryCardPage : Page
 
     #endregion
 
-    public const string ImportAudiobookText = "Import an audiobook (.m4b, mp3)";
+    public const string ImportAudiobookText = "Import an audiobook (.m4b, .m4a, .mp3)";
 
     public const string ImportAudiobooksFromDirectoryText =
-        "Import all audiobooks in a directory (recursively). Single-file audiobooks only (.m4b, mp3)";
+        "Import all audiobooks in a directory (recursively). Single-file audiobooks only (.m4b, .m4a, .mp3)";
 
     public const string ImportAudiobookWithMultipleFilesText =
-        "Import an audiobook made up of multiple files (.m4b, mp3)";
+        "Import an audiobook made up of multiple files (.m4b, .m4a, .mp3)";
 
     public const string ImportFromJsonFileText = "Import audiobooks from an Audibly export file (.audibly)";
 
@@ -105,7 +104,7 @@ public sealed partial class LibraryCardPage : Page
             UserSettings.ShowDataMigrationFailedDialog = false;
 
             // log the error
-            ViewModel.LoggingService.LogError(exception, true);
+            ViewModel.LoggingService.LogError(exception);
 
             // notify user that we failed to import their audiobooks
             ViewModel.EnqueueNotification(new Notification
@@ -374,16 +373,6 @@ public sealed partial class LibraryCardPage : Page
         p.StartInfo.FileName = "explorer.exe";
         p.StartInfo.Arguments = $"/open, \"{dir}\"";
         p.Start();
-    }
-
-    private void TestSentryLoggingButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        SentrySdk.CaptureMessage("Something went wrong");
-        ViewModel.EnqueueNotification(new Notification
-        {
-            Message = "Sentry message sent",
-            Severity = InfoBarSeverity.Success
-        });
     }
 
     private void ToggleLoadingProgressBar_OnClick(object sender, RoutedEventArgs e)

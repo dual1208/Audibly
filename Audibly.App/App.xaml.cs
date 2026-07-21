@@ -33,7 +33,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Windows.AppLifecycle;
-using Sentry;
 using WinRT.Interop;
 using Constants = Audibly.App.Helpers.Constants;
 using UnhandledExceptionEventArgs = Microsoft.UI.Xaml.UnhandledExceptionEventArgs;
@@ -56,17 +55,6 @@ public partial class App : Application
     /// </summary>
     public App()
     {
-        SentrySdk.Init(options =>
-        {
-            options.Dsn = Helpers.Sentry.Dsn;
-            options.AutoSessionTracking = true;
-            options.SampleRate = 0.25f;
-            options.TracesSampleRate = 0.25;
-            options.IsGlobalModeEnabled = true;
-            options.ProfilesSampleRate = 0.25;
-            options.Environment = "production";
-        });
-
         UnhandledException += OnUnhandledException;
         InitializeComponent();
     }
@@ -100,7 +88,7 @@ public partial class App : Application
 
     private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
-        ViewModel.LoggingService.LogError(e.Exception, true);
+        ViewModel.LoggingService.LogError(e.Exception);
     }
 
     /// <summary>
@@ -228,7 +216,7 @@ public partial class App : Application
                 Message = "An error occurred while trying to open the file.",
                 Severity = InfoBarSeverity.Error
             });
-            ViewModel.LoggingService.LogError(e, true);
+            ViewModel.LoggingService.LogError(e);
 
             if (onAppInstanceActivated)
                 await DialogService.ShowErrorDialogAsync("File Activation Error", e.Message);
@@ -379,7 +367,7 @@ public partial class App : Application
             }
             catch (Exception e)
             {
-                ViewModel.LoggingService.LogError(e, true);
+                ViewModel.LoggingService.LogError(e);
 
                 // delete the old database
                 using (var context = new AudiblyContext(dbOptions))
@@ -415,7 +403,7 @@ public partial class App : Application
             }
             catch (Exception e)
             {
-                ViewModel.LoggingService.LogError(e, true);
+                ViewModel.LoggingService.LogError(e);
                 Repository = new SqlAudiblyRepository(dbOptions);
             }
     }

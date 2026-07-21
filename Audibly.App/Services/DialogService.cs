@@ -35,7 +35,7 @@ public static class DialogService
         }
         catch (Exception e)
         {
-            App.ViewModel.LoggingService.LogError(e, true);
+            App.ViewModel.LoggingService.LogError(e);
             return null;
         }
     }

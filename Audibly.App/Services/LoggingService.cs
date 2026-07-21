@@ -5,7 +5,6 @@
 using System;
 using System.IO;
 using Audibly.App.Services.Interfaces;
-using Sentry;
 
 namespace Audibly.App.Services;
 
@@ -19,10 +18,8 @@ public class LoggingService(string logFilePath) : IloggingService
         File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
     }
 
-    public void LogError(Exception e, bool logToSentry = false)
+    public void LogError(Exception e)
     {
-        if (logToSentry) SentrySdk.CaptureException(e);
-
         var logMessage = $"ERROR: {DateTime.Now}: {e.Message}";
         File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
     }

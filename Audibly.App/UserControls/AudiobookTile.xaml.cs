@@ -148,7 +148,7 @@ public sealed partial class AudiobookTile : UserControl
         ViewModel.AppDataService.ExportMetadataAsync(audiobook.SourcePaths)
             .ContinueWith(task =>
             {
-                if (task.IsFaulted) App.ViewModel.LoggingService.LogError(task.Exception, true);
+                if (task.IsFaulted) App.ViewModel.LoggingService.LogError(task.Exception);
             }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 

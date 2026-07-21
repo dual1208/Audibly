@@ -91,7 +91,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Re-enabled sentry (after accidentally disabling it in v2.2.1)
 
 ## [2.2.1] - 2-24-25
 
@@ -133,13 +132,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Changed AudiobookTile and PlayerControl to use default CoverImage if the actual cover image is inaccessible
-- Updated Sentry configuration
 
 ## [2.1.9] - 12-23-24
 
 ### Fixed
 
-- Fixed Sentry logging
 
 ## [2.1.8] - 12-21-24
 
@@ -183,7 +180,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Re-enabled Sentry logging
 
 ## [2.1.2] - 12-3-24
 
@@ -289,13 +285,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated Privacy Policy (because of the addition of Sentry.io for error tracking).
-    - You can view the updated Privacy Policy [here](https://github.com/rstewa/Audibly/blob/main/PrivacyPolicy.md)
+- Updated Privacy Policy.
 - Updated the volume and playback speed settings to be saved even after restarting the app
 
 ### Added
 
-- Sentry.io for error tracking
 - Added contact card on Settings Page
 
 ## [2.0.10] - 06-12-2024

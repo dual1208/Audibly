@@ -137,7 +137,7 @@
                 <!--  Library  -->
                 <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" Text="Library" />
                 <toolkit:SettingsExpander
-                    Description="These folders are scanned on startup for new audiobooks (.m4b, .mp3). NOTE: This feature does not currently support audiobooks split across multiple files (e.g. audiobooks with separate files for chapters."
+                    Description="These folders are scanned on startup for new audiobooks (.m4b, .m4a, .mp3). NOTE: This feature does not currently support audiobooks split across multiple files (e.g. audiobooks with separate files for chapters."
                     Header="Watched Folders"
                     x:Name="WatchedFoldersExpander">
                     <toolkit:SettingsExpander.HeaderIcon>
@@ -267,7 +267,7 @@
                             <TextBlock
                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                 IsTextSelectionEnabled="True"
-                                Text="git clone https://github.com/rstewa/Audibly" />
+                                Text="git clone git@github.com:dual1208/Audibly.git" />
                         </toolkit:SettingsCard>
                         <toolkit:SettingsCard
                             Click="bugRequestCard_Click"
@@ -282,15 +282,15 @@
                             <StackPanel Margin="-12,0,0,0" Orientation="Vertical">
                                 <HyperlinkButton
                                     Content="Privacy statement"
-                                    NavigateUri="https://github.com/rstewa/Audibly/blob/main/PrivacyPolicy.md"
+                                    NavigateUri="https://github.com/dual1208/Audibly/blob/main/PrivacyPolicy.md"
                                     x:Name="PrivacyButton" />
                                 <HyperlinkButton
                                     Content="Additional license terms"
-                                    NavigateUri="https://github.com/rstewa/Audibly/blob/main/LICENSE"
+                                    NavigateUri="https://github.com/dual1208/Audibly/blob/main/LICENSE"
                                     x:Name="LicenseButton" />
                                 <HyperlinkButton
                                     Content="GitHub repository"
-                                    NavigateUri="https://github.com/rstewa/Audibly"
+                                    NavigateUri="https://github.com/dual1208/Audibly"
                                     x:Name="GitHubButton" />
                             </StackPanel>
                         </toolkit:SettingsCard>

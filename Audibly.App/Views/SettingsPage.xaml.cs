@@ -72,7 +72,7 @@ public sealed partial class SettingsPage : Page
 
     private async void bugRequestCard_Click(object sender, RoutedEventArgs e)
     {
-        await Launcher.LaunchUriAsync(new Uri("https://github.com/rstewa/Audibly/issues/new/choose"));
+        await Launcher.LaunchUriAsync(new Uri("https://github.com/dual1208/Audibly/issues/new/choose"));
     }
 
     private async void donateCard_Click(object sender, RoutedEventArgs e)

@@ -21,35 +21,10 @@
         <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
         <GenerateTestArtifacts>True</GenerateTestArtifacts>
         <AppxBundle>Always</AppxBundle>
-        <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
         <AppxBundlePlatforms>x86|x64|arm64</AppxBundlePlatforms>
         <StartupObject>Audibly.App.Program</StartupObject>
         <CreateMSIXPackage>True</CreateMSIXPackage>
     </PropertyGroup>
-
-    <!-- We recommend only using these features for release builds. -->
-    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-        <!-- Configure Sentry org and project -->
-        <SentryOrg>audibly</SentryOrg>
-        <SentryProject>audibly</SentryProject>
-
-        <!-- Automatically creates a release when building your application. -->
-        <SentryCreateRelease>false</SentryCreateRelease>
-
-        <!-- Automatically associates commits with the release. -->
-        <SentrySetCommits>true</SentrySetCommits>
-
-        <!-- Optionally provide explicit flags to the set-commits command -->
-        <SentrySetCommitOptions>--local</SentrySetCommitOptions>
-
-        <!-- Sends symbols to Sentry, enabling symbolication of stack traces. -->
-        <SentryUploadSymbols>true</SentryUploadSymbols>
-
-        <!-- Sends sources to Sentry, enabling display of source context. -->
-        <SentryUploadSources>true</SentryUploadSources>
-
-    </PropertyGroup>
-
 
     <ItemGroup>
         <None Remove="UserControls\CoverImageTile.xaml" />
@@ -108,9 +83,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="14.0.0" />
-        <PackageReference Include="CommunityToolkit.Labs.WinUI.Controls.MarkdownTextBlock" Version="0.1.250206-build.2040" />
-        <PackageReference Include="CommunityToolkit.Labs.WinUI.MarqueeText" Version="0.1.250206-build.2040" />
+        <PackageReference Include="CommunityToolkit.Labs.WinUI.Controls.MarkdownTextBlock" Version="0.1.251021-build.2365" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
         <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.250402" />
         <PackageReference Include="CommunityToolkit.WinUI.Controls.TokenizingTextBox" Version="8.2.250402" />
@@ -133,7 +106,6 @@
         <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4654" />
         <Manifest Include="$(ApplicationManifest)" />
         <PackageReference Include="PInvoke.User32" Version="0.7.124" />
-        <PackageReference Include="Sentry" Version="5.13.0" />
         <PackageReference Include="Sharpener" Version="0.2.4" />
         <PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" />
         <PackageReference Include="z440.atl.core" Version="7.2.0" />

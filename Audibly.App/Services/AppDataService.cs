@@ -69,7 +69,7 @@ public class AppDataService : IAppDataService
         }
         catch (Exception e)
         {
-            App.ViewModel.LoggingService.LogError(e, true);
+            App.ViewModel.LoggingService.LogError(e);
             return new Tuple<string, string>(string.Empty, string.Empty);
         }
     }
@@ -105,7 +105,7 @@ public class AppDataService : IAppDataService
         }
         catch (Exception e)
         {
-            App.ViewModel.LoggingService.LogError(e, true);
+            App.ViewModel.LoggingService.LogError(e);
         }
     }
 
@@ -176,7 +176,7 @@ public class AppDataService : IAppDataService
         }
         catch (Exception e)
         {
-            App.ViewModel.LoggingService.LogError(e, true);
+            App.ViewModel.LoggingService.LogError(e);
         }
     }
 
@@ -200,7 +200,7 @@ public class AppDataService : IAppDataService
         }
         catch (Exception e)
         {
-            App.ViewModel.LoggingService.LogError(e, true);
+            App.ViewModel.LoggingService.LogError(e);
             return false;
         }
     }

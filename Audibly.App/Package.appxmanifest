@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <Package
         xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
@@ -8,16 +8,16 @@
         IgnorableNamespaces="uap rescap">
 
     <Identity
-            Name="38488StewartRyan.24898061B3F0E"
-            Publisher="CN=680AB335-56C7-4E87-81DE-D27B78AC46A3"
+            Name="dual1208.AudiblyFork"
+            Publisher="CN=dual1208"
             Version="2.2.10.0"/>
 
     <mp:PhoneIdentity PhoneProductId="a4e10036-a97d-4e2e-8144-0a20e6bcb775"
                       PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>Audibly — Audiobook Player</DisplayName>
-        <PublisherDisplayName>rstewa35</PublisherDisplayName>
+        <DisplayName>Audibly Fork — Audiobook Player</DisplayName>
+        <PublisherDisplayName>dual1208 development</PublisherDisplayName>
         <Logo>Assets\StoreLogo.png</Logo>
     </Properties>
 
@@ -35,7 +35,7 @@
                      Executable="$targetnametoken$.exe"
                      EntryPoint="$targetentrypoint$">
             <uap:VisualElements
-                    DisplayName="Audibly — Audiobook Player"
+                    DisplayName="Audibly Fork — Audiobook Player"
                     Description="Audibly.App"
                     BackgroundColor="transparent"
                     Square150x150Logo="Assets\Square150x150Logo.png"
@@ -52,6 +52,15 @@
                         </uap:SupportedFileTypes>
                         <uap:DisplayName>Audiobook Player</uap:DisplayName>
                         <uap:EditFlags OpenIsSafe="true"/>
+                    </uap:FileTypeAssociation>
+                </uap:Extension>
+                <uap:Extension Category="windows.fileTypeAssociation">
+                    <uap:FileTypeAssociation Name="m4a">
+                        <uap:SupportedFileTypes>
+                            <uap:FileType>.m4a</uap:FileType>
+                        </uap:SupportedFileTypes>
+                        <uap:DisplayName>Audibly Fork</uap:DisplayName>
+                        <uap:Logo>Assets\Square44x44Logo.png</uap:Logo>
                     </uap:FileTypeAssociation>
                 </uap:Extension>
                 <uap:Extension Category="windows.fileTypeAssociation">

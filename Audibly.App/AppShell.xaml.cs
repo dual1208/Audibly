@@ -177,7 +177,7 @@ public sealed partial class AppShell : Page
     /// </summary>
     private async void ViewCodeNavPaneButton_Tapped(object sender, TappedRoutedEventArgs e)
     {
-        await Launcher.LaunchUriAsync(new Uri("https://github.com/rstewa/audibly"));
+        await Launcher.LaunchUriAsync(new Uri("https://github.com/dual1208/Audibly"));
     }
 
     /// <summary>

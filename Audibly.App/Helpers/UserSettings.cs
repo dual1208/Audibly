@@ -2,9 +2,9 @@
 // Updated: 05/08/2025
 
 using System;
+using System.Diagnostics;
 using System.Text.Json;
 using Windows.Storage;
-using Sentry;
 
 namespace Audibly.App.Helpers;
 
@@ -26,8 +26,7 @@ public static class UserSettings
             }
             catch (Exception e)
             {
-                // log to sentry
-                SentrySdk.CaptureException(e);
+                Debug.WriteLine(e);
                 return false;
             }
         }
@@ -50,8 +49,7 @@ public static class UserSettings
             }
             catch (Exception e)
             {
-                // log to sentry
-                SentrySdk.CaptureException(e);
+                Debug.WriteLine(e);
                 return false;
             }
         }
@@ -94,8 +92,7 @@ public static class UserSettings
             }
             catch (Exception e)
             {
-                // log to sentry
-                SentrySdk.CaptureException(e);
+                Debug.WriteLine(e);
                 return 100;
             }
         }
@@ -118,8 +115,7 @@ public static class UserSettings
             }
             catch (Exception e)
             {
-                // log to sentry
-                SentrySdk.CaptureException(e);
+                Debug.WriteLine(e);
                 return 100;
             }
         }
@@ -142,8 +138,7 @@ public static class UserSettings
             }
             catch (Exception e)
             {
-                // log to sentry
-                SentrySdk.CaptureException(e);
+                Debug.WriteLine(e);
                 return 1;
             }
         }
@@ -166,8 +161,7 @@ public static class UserSettings
             }
             catch (Exception e)
             {
-                // log to sentry
-                SentrySdk.CaptureException(e);
+                Debug.WriteLine(e);
                 return false;
             }
         }
@@ -194,7 +188,7 @@ public static class UserSettings
             }
             catch (Exception e)
             {
-                SentrySdk.CaptureException(e);
+                Debug.WriteLine(e);
                 return [];
             }
         }
